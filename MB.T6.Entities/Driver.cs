@@ -9,6 +9,6 @@ namespace MB.T6.Entities
         public string LastName { get; set; }
         public Gender Gender { get; set; }
 
-        public List<Car> Cars { get; set; }
+        public List<Car>? Cars { get; set; }
     }
 }
