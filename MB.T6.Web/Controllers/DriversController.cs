@@ -45,7 +45,7 @@ namespace MB.T6.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Gender")] Driver driver)
+        public async Task<IActionResult> Create(Driver driver)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace MB.T6.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Gender")] Driver driver)
+        public async Task<IActionResult> Edit(int id, Driver driver)
         {
             if (id != driver.Id)
             {
