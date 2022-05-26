@@ -15,7 +15,7 @@ namespace MB.T6.Web.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> List()
         {
             var drivers = await _context.Drivers.ToListAsync();
 
@@ -66,7 +66,7 @@ namespace MB.T6.Web.Controllers
             {
                 _context.Add(driver);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(driver);
         }
@@ -113,7 +113,7 @@ namespace MB.T6.Web.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(driver);
         }
@@ -150,7 +150,7 @@ namespace MB.T6.Web.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(List));
         }
 
         private bool DriverExists(int id)
