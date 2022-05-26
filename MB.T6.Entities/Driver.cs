@@ -12,16 +12,17 @@ namespace MB.T6.Entities
 
         public int Id { get; set; }
 
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Gender Gender { get; set; }
         public DateTime? DOB { get; set; }
+        public int Rating { get; set; }
+        public string? PhoneNumber { get; set; }
 
         public List<Car> Cars { get; set; }
 
 
-
+        // EF CORE Will ignore NotMapped properties
         [NotMapped]
         public string FullName
         {

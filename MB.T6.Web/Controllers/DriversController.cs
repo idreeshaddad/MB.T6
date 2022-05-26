@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MB.T6.Entities;
 using MB.T6.Web.Data;
+using MB.T6.Web.Models.Drivers;
 
 namespace MB.T6.Web.Controllers
 {
@@ -16,9 +17,23 @@ namespace MB.T6.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-              return _context.Drivers != null ? 
-                          View(await _context.Drivers.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Drivers'  is null.");
+            var drivers = await _context.Drivers.ToListAsync();
+
+            var driversVM = new List<DriverViewModel>();
+
+            foreach (var driver in drivers)
+            {
+                var driverVM = new DriverViewModel();
+                driverVM.Id = driver.Id;
+                driverVM.FullName = driver.FullName;
+                driverVM.Age = driver.Age;
+                driverVM.Rating = driver.Rating;
+                driverVM.PhoneNumber = driver.PhoneNumber;
+
+                driversVM.Add(driverVM);
+            }
+
+            return View(driversVM);
         }
 
         public async Task<IActionResult> Details(int? id)
