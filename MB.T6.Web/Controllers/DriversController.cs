@@ -3,35 +3,26 @@ using Microsoft.EntityFrameworkCore;
 using MB.T6.Entities;
 using MB.T6.Web.Data;
 using MB.T6.Web.Models.Drivers;
+using AutoMapper;
 
 namespace MB.T6.Web.Controllers
 {
     public class DriversController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public DriversController(ApplicationDbContext context)
+        public DriversController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> List()
         {
             var drivers = await _context.Drivers.ToListAsync();
 
-            var driversVM = new List<DriverViewModel>();
-
-            foreach (var driver in drivers)
-            {
-                var driverVM = new DriverViewModel();
-                driverVM.Id = driver.Id;
-                driverVM.FullName = driver.FullName;
-                driverVM.Age = driver.Age;
-                driverVM.Rating = driver.Rating;
-                driverVM.PhoneNumber = driver.PhoneNumber;
-
-                driversVM.Add(driverVM);
-            }
+            var driversVM = _mapper.Map<List<Driver>, List<DriverListViewModel>>(drivers);
 
             return View(driversVM);
         }
