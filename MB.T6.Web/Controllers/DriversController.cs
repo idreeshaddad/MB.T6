@@ -41,7 +41,9 @@ namespace MB.T6.Web.Controllers
                 return NotFound();
             }
 
-            return View(driver);
+            var driverVM = _mapper.Map<Driver, DriverDetailsViewModel>(driver);
+
+            return View(driverVM);
         }
 
         public IActionResult Create()

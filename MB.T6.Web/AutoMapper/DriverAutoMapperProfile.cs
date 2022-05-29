@@ -9,6 +9,7 @@ namespace MB.T6.Web.AutoMapper
         public DriverAutoMapperProfile()
         {
             CreateMap<Driver, DriverListViewModel>();
+            CreateMap<Driver, DriverDetailsViewModel>();
         }
     }
 }
