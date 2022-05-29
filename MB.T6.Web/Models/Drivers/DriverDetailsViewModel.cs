@@ -13,6 +13,12 @@ namespace MB.T6.Web.Models.Drivers
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
+
         public Gender Gender { get; set; }
 
         [Display(Name = "Date of Birth")]
