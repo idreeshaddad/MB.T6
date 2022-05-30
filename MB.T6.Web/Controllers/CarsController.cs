@@ -29,15 +29,12 @@ namespace MB.T6.Web.Controllers
         {
             var cars = await _context
                                 .Cars
-                                .Include(car => car.Driver) // For now memorize
+                                .Include(car => car.Driver)
                                 .ToListAsync();
 
             var carsVM = _mapper.Map<List<Car>, List<CarListViewModel>>(cars);
 
             return View(carsVM);
-
-            //var applicationDbContext = _context.Cars.Include(c => c.Driver);
-            //return View(await applicationDbContext.ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -47,35 +44,42 @@ namespace MB.T6.Web.Controllers
                 return NotFound();
             }
 
-            var car = await _context.Cars
-                .Include(c => c.Driver)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var car = await _context
+                                .Cars
+                                .Include(car => car.Driver)
+                                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (car == null)
             {
                 return NotFound();
             }
 
-            return View(car);
+            var carVM = _mapper.Map<Car, CarViewModel>(car);
+
+            return View(carVM);
         }
 
         public IActionResult Create()
         {
-            ViewData["DriverId"] = new SelectList(_context.Drivers, "Id", "FirstName");
+            ViewData["driversSource"] = new SelectList(_context.Drivers, "Id", "FullName");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Car car)
+        public async Task<IActionResult> Create(CarViewModel carVM)
         {
             if (ModelState.IsValid)
             {
+                var car = _mapper.Map<CarViewModel, Car>(carVM);
+
                 _context.Add(car);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DriverId"] = new SelectList(_context.Drivers, "Id", "FirstName", car.DriverId);
-            return View(car);
+
+            ViewData["DriverId"] = new SelectList(_context.Drivers, "Id", "FullName", carVM.DriverId);
+            return View(carVM);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -86,45 +90,40 @@ namespace MB.T6.Web.Controllers
             }
 
             var car = await _context.Cars.FindAsync(id);
+
             if (car == null)
             {
                 return NotFound();
             }
-            ViewData["DriverId"] = new SelectList(_context.Drivers, "Id", "FirstName", car.DriverId);
-            return View(car);
+
+            ViewData["driversSource"] = new SelectList(_context.Drivers, "Id", "FullName", car.DriverId);
+
+            var carVM = _mapper.Map<Car, CarViewModel>(car);
+
+            return View(carVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Car car)
+        public async Task<IActionResult> Edit(int id, CarViewModel carVM)
         {
-            if (id != car.Id)
+            if (id != carVM.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(car);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CarExists(car.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                var car = _mapper.Map<CarViewModel, Car>(carVM);
+
+                _context.Update(car);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DriverId"] = new SelectList(_context.Drivers, "Id", "FirstName", car.DriverId);
-            return View(car);
+
+            ViewData["DriverId"] = new SelectList(_context.Drivers, "Id", "FirstName", carVM.DriverId);
+            return View(carVM);
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -170,7 +169,7 @@ namespace MB.T6.Web.Controllers
         private bool CarExists(int id)
         {
             return (_context.Cars?.Any(e => e.Id == id)).GetValueOrDefault();
-        } 
+        }
 
         #endregion
     }

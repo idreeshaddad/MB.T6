@@ -9,6 +9,8 @@ namespace MB.T6.Web.AutoMapper
         public CarAutoMapperProfile()
         {
             CreateMap<Car, CarListViewModel>();
+
+            CreateMap<CarViewModel, Car>().ReverseMap();
         }
     }
 }

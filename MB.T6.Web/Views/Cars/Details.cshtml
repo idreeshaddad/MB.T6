@@ -1,10 +1,11 @@
-﻿@model MB.T6.Entities.Car
+﻿@using MB.T6.Web.Models.Cars
+@model CarViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Car Details";
 }
 
-<h1>Details</h1>
+<h1>Car Details</h1>
 
 <div>
     <h4>Car</h4>
@@ -29,10 +30,10 @@
             @Html.DisplayFor(model => model.Model)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Driver)
+            @Html.DisplayNameFor(model => model.DriverFullName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Driver.FirstName)
+            @Html.DisplayFor(model => model.DriverFullName)
         </dd>
     </dl>
 </div>

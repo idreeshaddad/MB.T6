@@ -9,6 +9,8 @@ namespace MB.T6.Web.Controllers
 {
     public class DriversController : Controller
     {
+        #region Data and Const
+
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 
@@ -17,6 +19,10 @@ namespace MB.T6.Web.Controllers
             _context = context;
             _mapper = mapper;
         }
+
+        #endregion
+
+        #region Actions
 
         public async Task<IActionResult> List()
         {
@@ -141,14 +147,20 @@ namespace MB.T6.Web.Controllers
             {
                 _context.Drivers.Remove(driver);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
         }
 
+        #endregion
+
+        #region Private
+
         private bool DriverExists(int id)
         {
-          return (_context.Drivers?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+            return (_context.Drivers?.Any(e => e.Id == id)).GetValueOrDefault();
+        } 
+
+        #endregion
     }
 }
