@@ -133,15 +133,19 @@ namespace MB.T6.Web.Controllers
                 return NotFound();
             }
 
-            var car = await _context.Cars
-                .Include(c => c.Driver)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var car = await _context
+                                .Cars
+                                .Include(car => car.Driver)
+                                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (car == null)
             {
                 return NotFound();
             }
 
-            return View(car);
+            var carVM = _mapper.Map<Car, CarViewModel>(car);
+
+            return View(carVM);
         }
 
         [HttpPost, ActionName("Delete")]
