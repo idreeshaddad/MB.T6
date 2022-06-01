@@ -59,15 +59,17 @@ namespace MB.T6.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Driver driver)
+        public async Task<IActionResult> Create(DriverViewModel driverVM)
         {
             if (ModelState.IsValid)
             {
+                var driver = _mapper.Map<DriverViewModel, Driver>(driverVM);
+
                 _context.Add(driver);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(List));
             }
-            return View(driver);
+            return View(driverVM);
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -82,22 +84,28 @@ namespace MB.T6.Web.Controllers
             {
                 return NotFound();
             }
-            return View(driver);
+
+            var driverVM = _mapper.Map<Driver, DriverViewModel>(driver);
+
+            return View(driverVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Driver driver)
+        public async Task<IActionResult> Edit(int id, DriverViewModel driverVM)
         {
-            if (id != driver.Id)
+            if (id != driverVM.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                var driver = _mapper.Map<DriverViewModel, Driver>(driverVM);
+
                 try
                 {
+                    
                     _context.Update(driver);
                     await _context.SaveChangesAsync();
                 }
@@ -114,7 +122,8 @@ namespace MB.T6.Web.Controllers
                 }
                 return RedirectToAction(nameof(List));
             }
-            return View(driver);
+
+            return View(driverVM);
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -124,14 +133,18 @@ namespace MB.T6.Web.Controllers
                 return NotFound();
             }
 
-            var driver = await _context.Drivers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var driver = await _context
+                                    .Drivers
+                                    .FirstOrDefaultAsync(m => m.Id == id);
+
             if (driver == null)
             {
                 return NotFound();
             }
 
-            return View(driver);
+            var driverVM = _mapper.Map<Driver, DriverViewModel>(driver);
+
+            return View(driverVM);
         }
 
         [HttpPost, ActionName("Delete")]

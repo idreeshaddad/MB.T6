@@ -10,6 +10,7 @@ namespace MB.T6.Web.AutoMapper
         {
             CreateMap<Driver, DriverListViewModel>();
             CreateMap<Driver, DriverDetailsViewModel>();
+            CreateMap<Driver, DriverViewModel>().ReverseMap();
         }
     }
 }
