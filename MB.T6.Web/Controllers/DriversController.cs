@@ -24,15 +24,19 @@ namespace MB.T6.Web.Controllers
 
         #region Actions
 
+        [HttpGet]
         public async Task<IActionResult> List()
         {
-            var drivers = await _context.Drivers.ToListAsync();
+            var drivers = await _context
+                                    .Drivers
+                                    .ToListAsync();
 
             var driversVM = _mapper.Map<List<Driver>, List<DriverListViewModel>>(drivers);
 
             return View(driversVM);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Drivers == null)
@@ -43,7 +47,8 @@ namespace MB.T6.Web.Controllers
             var driver = await _context
                                     .Drivers
                                     .Include(driver => driver.Cars)
-                                    .FirstOrDefaultAsync(m => m.Id == id);
+                                    .FirstOrDefaultAsync(driver => driver.Id == id);
+
             if (driver == null)
             {
                 return NotFound();
@@ -54,6 +59,7 @@ namespace MB.T6.Web.Controllers
             return View(driverVM);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -74,6 +80,7 @@ namespace MB.T6.Web.Controllers
             return View(driverVM);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Drivers == null)
@@ -128,6 +135,7 @@ namespace MB.T6.Web.Controllers
             return View(driverVM);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Drivers == null)
@@ -165,6 +173,20 @@ namespace MB.T6.Web.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
+        }
+
+
+        [HttpGet]
+        public IActionResult Search()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Search(string keyword)
+        {
+            return View();
         }
 
         #endregion
