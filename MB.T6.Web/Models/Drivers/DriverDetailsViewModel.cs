@@ -1,10 +1,16 @@
 ﻿using MB.T6.Utils.Enums;
+using MB.T6.Web.Models.Cars;
 using System.ComponentModel.DataAnnotations;
 
 namespace MB.T6.Web.Models.Drivers
 {
     public class DriverDetailsViewModel
     {
+        public DriverDetailsViewModel()
+        {
+            Cars = new List<CarViewModel>();
+        }
+
         public int Id { get; set; }
 
         [Display(Name = "First Name")]
@@ -29,6 +35,6 @@ namespace MB.T6.Web.Models.Drivers
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
-        //public List<CarViewModel> Cars { get; set; }
+        public List<CarViewModel> Cars { get; set; }
     }
 }

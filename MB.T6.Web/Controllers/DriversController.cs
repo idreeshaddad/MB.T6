@@ -40,8 +40,10 @@ namespace MB.T6.Web.Controllers
                 return NotFound();
             }
 
-            var driver = await _context.Drivers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var driver = await _context
+                                    .Drivers
+                                    .Include(driver => driver.Cars)
+                                    .FirstOrDefaultAsync(m => m.Id == id);
             if (driver == null)
             {
                 return NotFound();
