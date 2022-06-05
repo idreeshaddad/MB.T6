@@ -179,14 +179,28 @@ namespace MB.T6.Web.Controllers
         [HttpGet]
         public IActionResult Search()
         {
-            return View();
+            var drivers = new List<DriverListViewModel>(); 
+            return View(drivers);
         }
 
 
         [HttpPost]
         public async Task<IActionResult> Search(string keyword)
         {
-            return View();
+            var drivers = await _context
+                                .Drivers
+                                .Where(driver => 
+                                        driver.FirstName.Contains(keyword)
+                                        ||
+                                        driver.LastName.Contains(keyword)
+                                        ||
+                                        driver.PhoneNumber.Contains(keyword)
+                                )
+                                .ToListAsync();
+
+            var driverVMs = _mapper.Map<List<Driver>, List<DriverListViewModel>>(drivers);
+
+            return View(driverVMs);
         }
 
         #endregion
