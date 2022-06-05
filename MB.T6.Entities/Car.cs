@@ -1,4 +1,6 @@
-﻿namespace MB.T6.Entities
+﻿using System.Drawing;
+
+namespace MB.T6.Entities
 {
     public class Car
     {
@@ -6,7 +8,10 @@
         public string Manufacturer { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
-        
+        public DateTime? ProductionDate { get; set; }
+        public KnownColor Color { get; set; } = KnownColor.White;
+        public int NumberOfSeats { get; set; } = 4;
+
         public int DriverId { get; set; }
         public Driver Driver { get; set; }
     }
