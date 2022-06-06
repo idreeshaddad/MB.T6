@@ -166,6 +166,29 @@ namespace MB.T6.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public IActionResult AdvancedSearch()
+        {
+            var VM = new CarSearchViewModel();
+            return View(VM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AdvancedSearch(CarSearchViewModel viewModel)
+        {
+            var cars = await _context
+                            .Cars
+                            .Include(car => car.Driver)
+                            .Where(car => car.Manufacturer == viewModel.Manufacturer)
+                            .ToListAsync();
+
+            var carVMs = _mapper.Map<List<Car>, List<CarListViewModel>>(cars);
+
+            viewModel.Results = carVMs;
+
+            return View(viewModel);
+        }
+
         #endregion
 
         #region Private Methods

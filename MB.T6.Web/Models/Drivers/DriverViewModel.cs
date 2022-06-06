@@ -14,7 +14,7 @@ namespace MB.T6.Web.Models.Drivers
         public string LastName { get; set; }
 
         [Display(Name = "Full Name")]
-        public string FullName { get; set; }
+        public string? FullName { get; set; }
 
         public Gender Gender { get; set; }
 

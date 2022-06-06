@@ -1,0 +1,148 @@
+﻿@using MB.T6.Web.Models.Cars
+@using System.Drawing
+@model CarSearchViewModel
+
+@{
+    ViewData["Title"] = "Advanced Car Search";
+}
+
+<h1>Advanced Car Search</h1>
+
+<form asp-action="AdvancedSearch">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Manufacturer" class="control-label"></label>
+                <input asp-for="Manufacturer" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ProductionDate" class="control-label"></label>
+                <input asp-for="ProductionDate" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Color" class="control-label"></label>
+                <select asp-for="Color" asp-items="Html.GetEnumSelectList<KnownColor>()" class="form-control">
+                    <option value="NULL">--- Select Color ---</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="NumberOfSeats" class="control-label"></label>
+                <input asp-for="NumberOfSeats" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="DriverFirstName" class="control-label"></label>
+                <input asp-for="DriverFirstName" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="DriverLastName" class="control-label"></label>
+                <input asp-for="DriverLastName" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group mt-2">
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </div>
+</form>
+
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Manufacturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfSeats)
+            </th>
+            <th>
+                Driver Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model.Results)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => car.Manufacturer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => car.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => car.Model)
+                </td>
+                <td>
+                    @if (car.ProductionDate.HasValue)
+                    {
+                        @car.ProductionDate.Value.Year
+                    }
+                    else
+                    {
+                        <span>-</span>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => car.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => car.NumberOfSeats)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => car.Driver.FullName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@car.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@car.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@car.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
