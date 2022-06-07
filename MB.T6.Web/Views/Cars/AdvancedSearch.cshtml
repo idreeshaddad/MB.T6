@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <div class="row mt-2">
+    @*<div class="row mt-2">
         <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="DriverFirstName" class="control-label"></label>
@@ -69,7 +69,7 @@
                 <input asp-for="DriverLastName" class="form-control" />
             </div>
         </div>
-    </div>
+    </div>*@
 
     <div class="form-group mt-2">
         <input type="submit" value="Search" class="btn btn-primary" />
@@ -78,6 +78,7 @@
 
 <hr />
 
+<div class="mt-2">Number of results found: @Model.Results.Count()</div>
 <table class="table">
     <thead>
         <tr>

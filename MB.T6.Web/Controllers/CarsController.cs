@@ -176,16 +176,13 @@ namespace MB.T6.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AdvancedSearch(CarSearchViewModel viewModel)
         {
-            var cars = await _context
-                            .Cars
-                            .Include(car => car.Driver)
-                            .Where(car => car.Manufacturer == viewModel.Manufacturer)
-                            .ToListAsync();
+            IQueryable<Car> carQuery = _context.Cars;
+            carQuery = PrepareCarQuery(viewModel, carQuery);
 
+            var cars = await carQuery.Include(c => c.Driver).ToListAsync();
             var carVMs = _mapper.Map<List<Car>, List<CarListViewModel>>(cars);
 
             viewModel.Results = carVMs;
-
             return View(viewModel);
         }
 
@@ -196,6 +193,41 @@ namespace MB.T6.Web.Controllers
         private bool CarExists(int id)
         {
             return (_context.Cars?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        private IQueryable<Car> PrepareCarQuery(CarSearchViewModel viewModel, IQueryable<Car> carQuery)
+        {
+            if (string.IsNullOrWhiteSpace(viewModel.Manufacturer) == false)
+            {
+                carQuery = carQuery.Where(c => c.Manufacturer == viewModel.Manufacturer);
+            }
+
+            if (string.IsNullOrWhiteSpace(viewModel.Brand) == false)
+            {
+                carQuery = carQuery.Where(c => c.Brand == viewModel.Brand);
+            }
+
+            if (string.IsNullOrWhiteSpace(viewModel.Model) == false)
+            {
+                carQuery = carQuery.Where(c => c.Model == viewModel.Model);
+            }
+
+            if (viewModel.ProductionDate.HasValue)
+            {
+                carQuery = carQuery.Where(c => c.ProductionDate == viewModel.ProductionDate.Value);
+            }
+
+            if (viewModel.Color.HasValue)
+            {
+                carQuery = carQuery.Where(c => c.Color == viewModel.Color.Value);
+            }
+
+            if (viewModel.NumberOfSeats.HasValue)
+            {
+                carQuery = carQuery.Where(c => c.NumberOfSeats == viewModel.NumberOfSeats.Value);
+            }
+
+            return carQuery;
         }
 
         #endregion
