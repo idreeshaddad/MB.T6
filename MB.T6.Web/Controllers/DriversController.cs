@@ -126,6 +126,7 @@ namespace MB.T6.Web.Controllers
                     }
                     else
                     {
+                        // TODO log the error to log file to be reviewed later
                         throw;
                     }
                 }
