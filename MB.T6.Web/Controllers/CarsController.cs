@@ -5,6 +5,7 @@ using MB.T6.Entities;
 using MB.T6.Web.Data;
 using AutoMapper;
 using MB.T6.Web.Models.Cars;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MB.T6.Web.Controllers
 {
@@ -167,6 +168,7 @@ namespace MB.T6.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult AdvancedSearch()
         {
             var VM = new CarSearchViewModel();
@@ -174,6 +176,7 @@ namespace MB.T6.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AdvancedSearch(CarSearchViewModel viewModel)
         {
             IQueryable<Car> carQuery = _context.Cars;
@@ -212,9 +215,9 @@ namespace MB.T6.Web.Controllers
                 carQuery = carQuery.Where(c => c.Model == viewModel.Model);
             }
 
-            if (viewModel.ProductionDate.HasValue)
+            if (viewModel.ProductionYear.HasValue)
             {
-                carQuery = carQuery.Where(c => c.ProductionDate == viewModel.ProductionDate.Value);
+                carQuery = carQuery.Where(c => c.ProductionDate.Value.Year == viewModel.ProductionYear.Value);
             }
 
             if (viewModel.Color.HasValue)

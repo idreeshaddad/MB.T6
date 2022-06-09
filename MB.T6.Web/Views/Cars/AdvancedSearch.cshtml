@@ -1,5 +1,5 @@
-﻿@using MB.T6.Web.Models.Cars
-@using System.Drawing
+﻿@using System.Drawing
+@using MB.T6.Web.Models.Cars
 @model CarSearchViewModel
 
 @{
@@ -34,8 +34,16 @@
     <div class="row mt-2">
         <div class="col-md-4">
             <div class="form-group">
-                <label asp-for="ProductionDate" class="control-label"></label>
-                <input asp-for="ProductionDate" class="form-control" />
+                <label for="ProductionYear" class="control-label"></label>
+                <select id="ProductionYear" name="ProductionYear" class="form-control">
+                    <option value="NULL">--- Select Year ---</option>
+                    <option value="2000">2000</option>
+                    <option value="2001">2001</option>
+                    <option value="2002">2002</option>
+                    <option value="2003">2003</option>
+                    <option value="2004">2004</option>
+                    <option value="2005">2005</option>
+                </select>
             </div>
         </div>
 
@@ -92,7 +100,7 @@
                 @Html.DisplayNameFor(model => model.Model)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductionDate)
+                @Html.DisplayNameFor(model => model.ProductionYear)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Color)

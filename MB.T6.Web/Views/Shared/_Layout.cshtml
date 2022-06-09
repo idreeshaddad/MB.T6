@@ -34,9 +34,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Drivers" asp-action="Search">Search Driver</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="AdvancedSearch">Search Car</a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="AdvancedSearch">Advanced Search Car</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <span class="nav-link text-muted">Advanced Search Car</span>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

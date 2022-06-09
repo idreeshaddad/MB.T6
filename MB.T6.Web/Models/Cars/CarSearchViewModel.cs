@@ -16,8 +16,8 @@ namespace MB.T6.Web.Models.Cars
         public string? Brand { get; set; }
         public string? Model { get; set; }
 
-        [Display(Name = "Production Date")]
-        public DateTime? ProductionDate { get; set; }
+        [Display(Name = "Production Year")]
+        public int? ProductionYear { get; set; }
         public KnownColor? Color { get; set; }
 
         [Display(Name = "Number of Seats")]
@@ -29,7 +29,6 @@ namespace MB.T6.Web.Models.Cars
 
         [Display(Name = "Driver Second Name")]
         public string? DriverLastName { get; set; }
-
 
 
         // This is for the table of search results on the bottom of the page
