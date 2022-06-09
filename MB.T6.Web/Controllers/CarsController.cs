@@ -227,6 +227,16 @@ namespace MB.T6.Web.Controllers
                 carQuery = carQuery.Where(c => c.NumberOfSeats == viewModel.NumberOfSeats.Value);
             }
 
+            if(string.IsNullOrWhiteSpace(viewModel.DriverFirstName) == false)
+            {
+                carQuery = carQuery.Where(c => c.Driver.FirstName == viewModel.DriverFirstName);
+            }
+
+            if (string.IsNullOrWhiteSpace(viewModel.DriverLastName) == false)
+            {
+                carQuery = carQuery.Where(c => c.Driver.LastName == viewModel.DriverLastName);
+            }
+
             return carQuery;
         }
 

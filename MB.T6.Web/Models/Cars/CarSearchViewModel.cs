@@ -15,10 +15,19 @@ namespace MB.T6.Web.Models.Cars
         public string? Manufacturer { get; set; }
         public string? Brand { get; set; }
         public string? Model { get; set; }
+
+        [Display(Name = "Production Date")]
         public DateTime? ProductionDate { get; set; }
         public KnownColor? Color { get; set; }
+
+        [Display(Name = "Number of Seats")]
         public int? NumberOfSeats { get; set; }
+
+
+        [Display(Name = "Driver First Name")]
         public string? DriverFirstName { get; set; }
+
+        [Display(Name = "Driver Second Name")]
         public string? DriverLastName { get; set; }
 
 
