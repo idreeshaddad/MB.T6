@@ -36,5 +36,6 @@ namespace MB.T6.Web.Models.Drivers
         public string PhoneNumber { get; set; }
 
         public List<CarViewModel> Cars { get; set; }
+        public string? Image { get; set; }
     }
 }

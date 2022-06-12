@@ -45,5 +45,7 @@ namespace MB.T6.Entities
             }
 
         }
+
+        public string? Image { get; set; }
     }
 }

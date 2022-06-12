@@ -58,6 +58,12 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="~/img/drivers/@Model.Image" alt="@Model.FullName" />
+        </dd>
     </dl>
 
     <hr />
@@ -68,6 +74,8 @@
                 <th>Manufacturer</th>
                 <th>Brand</th>
                 <th>Model</th>
+                <th>Logo</th>
+                <th> </th>
             </tr>
         </thead>
         <tbody>
@@ -77,6 +85,14 @@
                     <td>@car.Manufacturer</td>
                     <td>@car.Brand</td>
                     <td>@car.Model</td>
+                    <td>
+                        <img class="car-logo" src="~/img/logos/@car.LogoImage" alt="@car.CarFullName" />
+                    </td>
+                    <td>
+                        <a asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">
+                            <i class="fa-solid fa-info"></i>
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>

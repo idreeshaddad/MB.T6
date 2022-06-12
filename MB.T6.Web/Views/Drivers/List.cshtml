@@ -10,7 +10,7 @@
 <p>
     <a asp-action="Create">Create New Driver</a>
 </p>
-<table class="table">
+<table class="table table-striped table-hover">
     <thead>
         <tr>
             <th>
@@ -44,9 +44,15 @@
                 @Html.DisplayFor(modelItem => driver.Rating)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@driver.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@driver.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@driver.Id">Delete</a>
+                <a class="text-decoration-none px-2 text-warning" asp-action="Edit" asp-route-id="@driver.Id">
+                    <i class="fa-solid fa-pen"></i>
+                </a> |
+                <a class="text-decoration-none px-2 text-info" asp-action="Details" asp-route-id="@driver.Id">
+                    <i class="fa-solid fa-info"></i>
+                </a> |
+                <a class="text-decoration-none px-2 text-danger" asp-action="Delete" asp-route-id="@driver.Id">
+                    <i class="fa-solid fa-trash"></i>
+                </a>
             </td>
         </tr>
 }
