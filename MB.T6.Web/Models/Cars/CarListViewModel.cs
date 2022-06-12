@@ -19,5 +19,15 @@ namespace MB.T6.Web.Models.Cars
         public int NumberOfSeats { get; set; } = 4;
 
         public DriverDetailsViewModel Driver { get; set; }
+        public string? Image { get; set; }
+        public string? LogoImage { get; set; }
+
+
+        public string? CarFullName { 
+            get
+            {
+                return $"{Manufacturer} {Brand} {Model}";
+            } 
+        }
     }
 }

@@ -14,5 +14,8 @@ namespace MB.T6.Entities
 
         public int DriverId { get; set; }
         public Driver Driver { get; set; }
+
+        public string? Image { get; set; }
+        public string? LogoImage { get; set; }
     }
 }

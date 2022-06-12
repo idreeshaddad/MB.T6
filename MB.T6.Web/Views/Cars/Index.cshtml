@@ -34,6 +34,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Driver)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -68,6 +71,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => car.Driver.FullName)
+                </td>
+                <td>
+                    <img class="car-logo" src="~/img/logos/@car.LogoImage" alt="@car.CarFullName" />
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@car.Id">Edit</a> |

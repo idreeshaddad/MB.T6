@@ -20,5 +20,16 @@ namespace MB.T6.Web.Models.Cars
 
         [Display(Name = "Driver")]
         public string? DriverFullName { get; set; }
+
+        public string? Image { get; set; }
+        public string? LogoImage { get; set; }
+
+        public string? CarFullName
+        {
+            get
+            {
+                return $"{Manufacturer} {Brand} {Model}";
+            }
+        }
     }
 }
