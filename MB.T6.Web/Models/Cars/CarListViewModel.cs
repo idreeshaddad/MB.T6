@@ -11,6 +11,9 @@ namespace MB.T6.Web.Models.Cars
         public string Brand { get; set; }
         public string Model { get; set; }
 
+        [Display(Name = "Plate Number")]
+        public string PlateNumber { get; set; }
+
         [Display(Name = "Production Date")]
         public DateTime? ProductionDate { get; set; }
         public KnownColor Color { get; set; } = KnownColor.White;

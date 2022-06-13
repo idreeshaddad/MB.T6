@@ -127,28 +127,6 @@ namespace MB.T6.Web.Controllers
             return View(carVM);
         }
 
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Cars == null)
-            {
-                return NotFound();
-            }
-
-            var car = await _context
-                                .Cars
-                                .Include(car => car.Driver)
-                                .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (car == null)
-            {
-                return NotFound();
-            }
-
-            var carVM = _mapper.Map<Car, CarViewModel>(car);
-
-            return View(carVM);
-        }
-
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -16,6 +16,9 @@ namespace MB.T6.Web.Models.Cars
         public string? Brand { get; set; }
         public string? Model { get; set; }
 
+        [Display(Name = "Plate Number")]
+        public string PlateNumber { get; set; }
+
         [Display(Name = "Production Year")]
         public int? ProductionYear { get; set; }
         public KnownColor? Color { get; set; }

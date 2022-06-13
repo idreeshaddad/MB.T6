@@ -20,22 +20,16 @@
                 @Html.DisplayNameFor(model => model.Brand)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Model)
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlateNumber)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ProductionDate)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Color)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfSeats)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Driver)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Image)
+            <th class="text-center">
+                Logo
             </th>
             <th></th>
         </tr>
@@ -51,7 +45,10 @@
                     @Html.DisplayFor(modelItem => car.Brand)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => car.Model)
+                    <span class="car-color" style="background-color: @car.Color;"></span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => car.PlateNumber)
                 </td>
                 <td>
                     @if (car.ProductionDate.HasValue)
@@ -63,30 +60,54 @@
                         <span>-</span>
                     }
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => car.Color)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => car.NumberOfSeats)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => car.Driver.FullName)
-                </td>
-                <td>
+                <td class="text-center">
                     <img class="car-logo" src="~/img/logos/@car.LogoImage" alt="@car.CarFullName" />
                 </td>
                 <td>
                     <a class="text-decoration-none px-2 text-warning" asp-action="Edit" asp-route-id="@car.Id">
                         <i class="fa-solid fa-pen"></i>
-                    </a> 
+                    </a>
                     <a class="text-decoration-none px-2" asp-action="Details" asp-route-id="@car.Id">
                         <i class="fa-solid fa-info"></i>
-                    </a> 
-                    <a class="text-decoration-none px-2 text-danger" asp-action="Delete" asp-route-id="@car.Id">
+                    </a>
+                    <a class="text-decoration-none px-2 text-danger pointer" data-bs-toggle="modal" data-bs-target="#deleteModal_@car.Id">
                         <i class="fa-solid fa-trash"></i>
                     </a>
+
+                    <!-- Delete Modal -->
+                    <div class="modal fade" id="deleteModal_@car.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <h6>
+                                        Are you sure you want to delete
+                                        <span class="text-danger">@car.CarFullName</span>?
+                                    </h6>
+                                    <p>Assinged to: <span class="text-primary">@car.Driver.FullName</span></p>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                                    <form asp-action="Delete">
+                                        <input type="hidden" value="@car.Id" name="id" />
+                                        <input type="submit" value="Delete" class="btn btn-danger" />
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+Results: @Model.Count()

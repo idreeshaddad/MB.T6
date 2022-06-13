@@ -8,6 +8,7 @@ namespace MB.T6.Entities
         public string Manufacturer { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
+        public string PlateNumber { get; set; }
         public DateTime? ProductionDate { get; set; }
         public KnownColor Color { get; set; } = KnownColor.White;
         public int NumberOfSeats { get; set; } = 4;

@@ -20,3 +20,15 @@ body {
 .car-logo {
     height: 30px;
 }
+
+.pointer {
+    cursor: pointer;
+}
+
+.car-color {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #333;
+    border-radius: 50%;
+}
