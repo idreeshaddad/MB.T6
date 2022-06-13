@@ -10,7 +10,7 @@
 <p>
     <a asp-action="Create">Create New Car</a>
 </p>
-<table class="table">
+<table class="table table-striped table-hover">
     <thead>
         <tr>
             <th>
@@ -76,9 +76,15 @@
                     <img class="car-logo" src="~/img/logos/@car.LogoImage" alt="@car.CarFullName" />
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@car.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@car.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@car.Id">Delete</a>
+                    <a class="text-decoration-none px-2 text-warning" asp-action="Edit" asp-route-id="@car.Id">
+                        <i class="fa-solid fa-pen"></i>
+                    </a> 
+                    <a class="text-decoration-none px-2" asp-action="Details" asp-route-id="@car.Id">
+                        <i class="fa-solid fa-info"></i>
+                    </a> 
+                    <a class="text-decoration-none px-2 text-danger" asp-action="Delete" asp-route-id="@car.Id">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
                 </td>
             </tr>
         }
