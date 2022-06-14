@@ -29,6 +29,7 @@ namespace MB.T6.Web.Controllers
         {
             var drivers = await _context
                                     .Drivers
+                                    .OrderByDescending(driver => driver.Rating)
                                     .ToListAsync();
 
             var driversVM = _mapper.Map<List<Driver>, List<DriverListViewModel>>(drivers);

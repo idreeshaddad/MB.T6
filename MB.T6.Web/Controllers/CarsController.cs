@@ -30,6 +30,7 @@ namespace MB.T6.Web.Controllers
         {
             var cars = await _context
                                 .Cars
+                                .OrderByDescending(car => car.ProductionDate)
                                 .Include(car => car.Driver)
                                 .ToListAsync();
 
@@ -160,7 +161,11 @@ namespace MB.T6.Web.Controllers
             IQueryable<Car> carQuery = _context.Cars;
             carQuery = PrepareCarQuery(viewModel, carQuery);
 
-            var cars = await carQuery.Include(c => c.Driver).ToListAsync();
+            var cars = await carQuery
+                                .Include(c => c.Driver)
+                                .OrderByDescending(car => car.ProductionDate)
+                                .ToListAsync();
+
             var carVMs = _mapper.Map<List<Car>, List<CarListViewModel>>(cars);
 
             viewModel.Results = carVMs;
