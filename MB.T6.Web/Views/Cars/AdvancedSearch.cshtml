@@ -34,9 +34,9 @@
     <div class="row mt-2">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="ProductionYear" class="control-label"></label>
-                <select id="ProductionYear" name="ProductionYear" class="form-control">
-                    <option value="NULL">--- Select Year ---</option>
+                <label for="ProductionYearStart" class="control-label">Production Year Start</label>
+                <select id="ProductionYearStart" name="ProductionYearStart" class="form-control">
+                    <option value="NULL">--- Select Start Year ---</option>
                     <option value="2000">2000</option>
                     <option value="2001">2001</option>
                     <option value="2002">2002</option>
@@ -49,9 +49,15 @@
 
         <div class="col-md-4">
             <div class="form-group">
-                <label asp-for="Color" class="control-label"></label>
-                <select asp-for="Color" asp-items="Html.GetEnumSelectList<KnownColor>()" class="form-control">
-                    <option value="NULL">--- Select Color ---</option>
+                <label for="ProductionYearEnd" class="control-label">Production Year End</label>
+                <select id="ProductionYearEnd" name="ProductionYearEnd" class="form-control">
+                    <option value="NULL">--- Select End Year ---</option>
+                    <option value="2000">2000</option>
+                    <option value="2001">2001</option>
+                    <option value="2002">2002</option>
+                    <option value="2003">2003</option>
+                    <option value="2004">2004</option>
+                    <option value="2005">2005</option>
                 </select>
             </div>
         </div>
@@ -77,6 +83,14 @@
                 <input asp-for="DriverLastName" class="form-control" />
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Color" class="control-label"></label>
+                <select asp-for="Color" asp-items="Html.GetEnumSelectList<KnownColor>()" class="form-control">
+                    <option value="NULL">--- Select Color ---</option>
+                </select>
+            </div>
+        </div>
     </div>
 
     <div class="form-group mt-2">
@@ -100,7 +114,7 @@
                 @Html.DisplayNameFor(model => model.Model)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductionYear)
+                Production Year
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Color)

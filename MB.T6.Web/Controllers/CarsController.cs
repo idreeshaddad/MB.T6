@@ -193,9 +193,13 @@ namespace MB.T6.Web.Controllers
                 carQuery = carQuery.Where(c => c.Model == viewModel.Model);
             }
 
-            if (viewModel.ProductionYear.HasValue)
+            if (viewModel.ProductionYearStart.HasValue && viewModel.ProductionYearEnd.HasValue)
             {
-                carQuery = carQuery.Where(c => c.ProductionDate.Value.Year == viewModel.ProductionYear.Value);
+                carQuery = carQuery.Where(
+                                c => c.ProductionDate.Value.Year >= viewModel.ProductionYearStart.Value
+                                &&
+                                c.ProductionDate.Value.Year <= viewModel.ProductionYearEnd.Value
+                                );
             }
 
             if (viewModel.Color.HasValue)

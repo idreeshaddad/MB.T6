@@ -19,8 +19,16 @@ namespace MB.T6.Web.Models.Cars
         [Display(Name = "Plate Number")]
         public string PlateNumber { get; set; }
 
-        [Display(Name = "Production Year")]
-        public int? ProductionYear { get; set; }
+
+
+        [Display(Name = "Production Year Start")]
+        public int? ProductionYearStart { get; set; }
+
+        [Display(Name = "Production Year End")]
+        public int? ProductionYearEnd { get; set; }
+
+
+
         public KnownColor? Color { get; set; }
 
         [Display(Name = "Number of Seats")]
